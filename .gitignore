@@ -1,0 +1,9 @@
+node_modules/**
+.idea
+.metaapi
+dist/**
+
+.env
+.env.*
+!.env.example
+*.sqlite

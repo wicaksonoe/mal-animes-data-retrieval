@@ -1,0 +1,9 @@
+node_modules/**
+.idea
+.metaapi
+build/**
+yarn.lock
+
+.env
+.env.*
+*.sqlite
