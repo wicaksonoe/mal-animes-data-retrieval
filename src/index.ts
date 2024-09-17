@@ -18,22 +18,26 @@ async function getAndSaveDetailAnime(id: number): Promise<number> {
     }
   });
 
-  if (response) {
+  if (response && statusCode == 200) {
     const data = {
       id: newGuid(),
       mal_id: response.data.id,
       title: response.data.title,
       synopsis: response.data.synopsis.replaceAll('\n', '').replaceAll('\r', ''),
-      genres: response.data.genres
-        .map((genre: { name: string }) => genre.name.toLowerCase().replaceAll(' ', '_'))
-        .join(','),
+      genres: '',
     };
+
+    if (response.data.genres) {
+      data.genres = response.data.genres
+        .map((genre: { name: string }) => genre.name.toLowerCase().replaceAll(' ', '_'))
+        .join(',');
+    }
 
     await AppDataSource.manager.save(AppDataSource.manager.create(Anime, data));
     console.log(`${id} saved - (req: ${x})`);
   }
 
-  if (statusCode == 503) {
+  if (statusCode == 503 || statusCode == 504) {
     console.log('cooldown 5m.....');
     await new Promise((resolve) => setTimeout(resolve, 5 * 70_000));
 
