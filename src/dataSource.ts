@@ -12,10 +12,13 @@ export class Anime {
     nsfw: string,
     status: string,
     num_episodes: number,
-    start_year: number,
-    start_season: string,
     source: string,
-    rating: string
+    rating: string,
+    start_year?: number,
+    start_season?: string,
+    rank?: number,
+    mean?: string,
+    scoring_users?: number
   ) {
     this.guid = newGuid();
     this.mal_id = mal_id;
@@ -30,6 +33,9 @@ export class Anime {
     this.start_season = start_season;
     this.source = source;
     this.rating = rating;
+    this.rank = rank;
+    this.mean = mean;
+    this.scoring_users = scoring_users;
   }
 
   @PrimaryGeneratedColumn({ name: 'Id' })
@@ -65,17 +71,26 @@ export class Anime {
   @Column({ name: 'NumberOfEpisodes' })
   num_episodes: number;
 
-  @Column({ name: 'StartYear' })
-  start_year: number;
+  @Column({ name: 'StartYear', nullable: true })
+  start_year?: number;
 
-  @Column({ name: 'StartSeason' })
-  start_season: string;
+  @Column({ name: 'StartSeason', nullable: true })
+  start_season?: string;
 
   @Column({ name: 'Source' })
   source: string;
 
   @Column({ name: 'Rating' })
   rating: string;
+
+  @Column({ name: 'Rank', nullable: true })
+  rank?: number;
+
+  @Column({ name: 'MeanScore', nullable: true })
+  mean?: string;
+
+  @Column({ name: 'ScoringUsers', nullable: true })
+  scoring_users?: number;
 
   @OneToMany(() => AnimeStudio, (studio) => studio.anime)
   studios: AnimeStudio[];

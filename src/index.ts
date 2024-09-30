@@ -13,7 +13,7 @@ async function getAndSaveDetailAnime(id: number): Promise<number> {
     .get(`/anime/${id}`, {
       params: {
         fields:
-          'title,synopsis,genres,start_date,end_date,nsfw,status,num_episodes,start_season,source,rating,studios,related_anime,recommendations',
+          'title,synopsis,genres,start_date,end_date,nsfw,status,num_episodes,start_season,source,rating,studios,related_anime,recommendations,rank,mean,num_scoring_users',
       },
     })
     .catch((error) => {
@@ -39,10 +39,13 @@ async function getAndSaveDetailAnime(id: number): Promise<number> {
       response.data.nsfw,
       response.data.status,
       response.data.num_episodes,
-      response.data.start_season.year,
-      response.data.start_season.season,
       response.data.source,
-      response.data.rating
+      response.data.rating,
+      response.data.start_season?.year,
+      response.data.start_season?.season,
+      response.data.rank,
+      response.data.mean,
+      response.data.num_scoring_users
     );
 
     await AppDataSource.manager.save(anime);
@@ -111,7 +114,7 @@ async function Main() {
   // 2. if response is 503, wait 5m, set request num to 1, and retry
   // 3. if request num is 300, wait 5m
   // 4. else save data and wait 1.1s
-  for (let i = 1; i <= 70_000; i++) {
+  for (let i = 57615; i <= 70_000; i++) {
     await getAndSaveDetailAnime(i);
 
     if (x % 300 == 0 && x != 0) {
