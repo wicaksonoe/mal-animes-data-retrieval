@@ -14,11 +14,11 @@ export class Anime {
     num_episodes: number,
     source: string,
     rating: string,
-    start_year?: number,
-    start_season?: string,
-    rank?: number,
-    mean?: string,
-    scoring_users?: number
+    start_year: number,
+    start_season: string,
+    rank: number,
+    mean: string,
+    scoring_users: number
   ) {
     this.guid = newGuid();
     this.mal_id = mal_id;
@@ -50,47 +50,47 @@ export class Anime {
   @Column({ name: 'Title' })
   title: string;
 
-  @Column({ name: 'Synopsis' })
+  @Column({ name: 'Synopsis', nullable: true })
   synopsis: string;
 
   @OneToMany(() => AnimeGenre, (genre) => genre.anime)
   genres: AnimeGenre[];
 
-  @Column({ name: 'StartDate' })
+  @Column({ name: 'StartDate', nullable: true })
   start_date: number;
 
-  @Column({ name: 'EndDate' })
+  @Column({ name: 'EndDate', nullable: true })
   end_date: number;
 
-  @Column({ name: 'Nsfw' })
+  @Column({ name: 'Nsfw', nullable: true })
   nsfw: string;
 
-  @Column({ name: 'Status' })
+  @Column({ name: 'Status', nullable: true })
   status: string;
 
-  @Column({ name: 'NumberOfEpisodes' })
+  @Column({ name: 'NumberOfEpisodes', nullable: true })
   num_episodes: number;
 
   @Column({ name: 'StartYear', nullable: true })
-  start_year?: number;
+  start_year: number;
 
   @Column({ name: 'StartSeason', nullable: true })
-  start_season?: string;
+  start_season: string;
 
-  @Column({ name: 'Source' })
+  @Column({ name: 'Source', nullable: true })
   source: string;
 
-  @Column({ name: 'Rating' })
+  @Column({ name: 'Rating', nullable: true })
   rating: string;
 
   @Column({ name: 'Rank', nullable: true })
-  rank?: number;
+  rank: number;
 
   @Column({ name: 'MeanScore', nullable: true })
-  mean?: string;
+  mean: string;
 
   @Column({ name: 'ScoringUsers', nullable: true })
-  scoring_users?: number;
+  scoring_users: number;
 
   @OneToMany(() => AnimeStudio, (studio) => studio.anime)
   studios: AnimeStudio[];

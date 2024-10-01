@@ -112,12 +112,12 @@ async function Main() {
 
   // 1. do request
   // 2. if response is 503, wait 5m, set request num to 1, and retry
-  // 3. if request num is 300, wait 5m
+  // 3. if request num is 150, wait 5m
   // 4. else save data and wait 1.1s
-  for (let i = 57615; i <= 70_000; i++) {
+  for (let i = 1; i <= 70_000; i++) {
     await getAndSaveDetailAnime(i);
 
-    if (x % 300 == 0 && x != 0) {
+    if (x % 150 == 0 && x != 0) {
       console.log('cooldown 5m.....');
       x = 0;
       await new Promise((resolve) => setTimeout(resolve, 5 * 70_000));
