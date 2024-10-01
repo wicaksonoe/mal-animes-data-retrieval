@@ -50,9 +50,8 @@ async function getAndSaveDetailAnime(id: number): Promise<number> {
 
     await AppDataSource.manager.save(anime);
 
-    let genres: AnimeGenre[] = [];
     if (response.data.genres) {
-      genres = response.data.genres.map((genre: { name: string }): AnimeGenre => {
+      const genres: AnimeGenre[] = response.data.genres.map((genre: { name: string }): AnimeGenre => {
         const genreName = genre.name.toLowerCase().replaceAll(' ', '_');
         return new AnimeGenre(anime, genreName);
       });
@@ -60,9 +59,8 @@ async function getAndSaveDetailAnime(id: number): Promise<number> {
       await AppDataSource.manager.save(genres);
     }
 
-    let related_anime: RelatedAnime[] = [];
     if (response.data.related_anime) {
-      related_anime = response.data.related_anime.map(
+      const related_anime: RelatedAnime[] = response.data.related_anime.map(
         (related_anime: { node: { id: number }; relation_type: string }): RelatedAnime => {
           return new RelatedAnime(anime, related_anime.node.id, related_anime.relation_type);
         }
@@ -71,9 +69,8 @@ async function getAndSaveDetailAnime(id: number): Promise<number> {
       await AppDataSource.manager.save(related_anime);
     }
 
-    let recommendations: AnimeRecommendation[] = [];
     if (response.data.recommendations) {
-      recommendations = response.data.recommendations.map(
+      const recommendations: AnimeRecommendation[] = response.data.recommendations.map(
         (recommendations: { node: { id: number }; num_recommendations: number }): AnimeRecommendation => {
           return new AnimeRecommendation(anime, recommendations.node.id, recommendations.num_recommendations);
         }
@@ -82,9 +79,8 @@ async function getAndSaveDetailAnime(id: number): Promise<number> {
       await AppDataSource.manager.save(recommendations);
     }
 
-    let studios: AnimeStudio[] = [];
     if (response.data.studios) {
-      studios = response.data.studios.map((studios: { name: string }): AnimeStudio => {
+      const studios: AnimeStudio[] = response.data.studios.map((studios: { name: string }): AnimeStudio => {
         return new AnimeStudio(anime, studios.name);
       });
 
