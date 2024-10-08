@@ -1,13 +1,9 @@
 # MyAnimeList Anime Database
 
----
-
 - Containing 27817 animes per 6 October 2024
 - All data obtained using [MyAnimeList API (beta ver.) (2)](https://myanimelist.net/apiconfig/references/api/v2)
 
 ## Database Schema
-
----
 
 ![database_schema](database_diagram.png)
 
