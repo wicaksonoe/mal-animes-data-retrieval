@@ -12,6 +12,7 @@ Notes:
 - MalId is Id from [MyAnimeList.net](https://myanimelist.net)
 - Id and Guid is generated automatically and doesn't related with [MyAnimeList.net](https://myanimelist.net)
 - Might contain duplicate or incomplete data, please consider to clean and verify by yourself
+- `Animes.StartDate` and `Animes.EndDate` are unix timetstamp in seconds
 
 ## Running Project
 
